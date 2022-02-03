@@ -13,7 +13,7 @@ class AppTextStyles {
   static final TextStyle titleRegular = GoogleFonts.lexendDeca(
     fontSize: 20,
     fontWeight: FontWeight.w400,
-    color: AppColors.heading,
+    color: AppColors.background,
   );
   static final TextStyle titleBoldHeading = GoogleFonts.lexendDeca(
     fontSize: 20,
@@ -80,32 +80,37 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
     color: AppColors.background,
   );
-  static final TextStyle captionBackground = GoogleFonts.lexendDeca(
+  static final TextStyle input = GoogleFonts.inter(
+    fontSize: 15,
+    fontWeight: FontWeight.w400,
+    color: AppColors.input,
+  );
+  static final TextStyle captionBackground = GoogleFonts.inter(
     fontSize: 13,
     fontWeight: FontWeight.w400,
     color: AppColors.background,
   );
-  static final TextStyle captionShape = GoogleFonts.lexendDeca(
+  static final TextStyle captionShape = GoogleFonts.inter(
     fontSize: 13,
     fontWeight: FontWeight.w400,
     color: AppColors.shape,
   );
-  static final TextStyle captionBody = GoogleFonts.lexendDeca(
+  static final TextStyle captionBody = GoogleFonts.inter(
     fontSize: 13,
     fontWeight: FontWeight.w400,
     color: AppColors.body,
   );
-  static final TextStyle captionBoldBackground = GoogleFonts.lexendDeca(
+  static final TextStyle captionBoldBackground = GoogleFonts.inter(
     fontSize: 13,
     fontWeight: FontWeight.w600,
     color: AppColors.background,
   );
-  static final TextStyle captionBoldShape = GoogleFonts.lexendDeca(
+  static final TextStyle captionBoldShape = GoogleFonts.inter(
     fontSize: 13,
     fontWeight: FontWeight.w600,
     color: AppColors.shape,
   );
-  static final TextStyle captionBoldBody = GoogleFonts.lexendDeca(
+  static final TextStyle captionBoldBody = GoogleFonts.inter(
     fontSize: 13,
     fontWeight: FontWeight.w600,
     color: AppColors.body,
