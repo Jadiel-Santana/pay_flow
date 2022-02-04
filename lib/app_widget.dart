@@ -5,6 +5,7 @@ import 'package:pay_flow/modules/home/home_page.dart';
 import 'package:pay_flow/modules/insert_billet/insert_billet_page.dart';
 import 'package:pay_flow/modules/login/login_page.dart';
 import 'package:pay_flow/modules/splash/splash_page.dart';
+import 'package:pay_flow/shared/models/user_model.dart';
 import 'package:pay_flow/shared/themes/app_colors.dart';
 
 class AppWidget extends StatelessWidget {
@@ -28,9 +29,15 @@ class AppWidget extends StatelessWidget {
       routes: {
         '/splash': (context) => const SplashPage(),
         '/login': (context) => const LoginPage(),
-        '/home': (context) => const HomePage(),
+        '/home': (context) => HomePage(
+              user: ModalRoute.of(context)!.settings.arguments as UserModel,
+            ),
         '/barcode_scanner': (context) => const BarcodeScannerPage(),
-        '/insert_billet': (context) => const InsertBilletPage(),
+        '/insert_billet': (context) => InsertBilletPage(
+            barcode: (ModalRoute.of(context) != null)
+              ? ModalRoute.of(context)!.settings.arguments.toString()
+              : null
+        ),
       },
     );
   }

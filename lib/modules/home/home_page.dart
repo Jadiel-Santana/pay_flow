@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:pay_flow/modules/extract/extract_page.dart';
 import 'package:pay_flow/modules/home/home_controller.dart';
+import 'package:pay_flow/modules/my_billets/my_billets_page.dart';
+import 'package:pay_flow/shared/models/user_model.dart';
 import 'package:pay_flow/shared/themes/app_colors.dart';
 import 'package:pay_flow/shared/themes/app_text_styles.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final UserModel user;
+
+  const HomePage({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -13,8 +21,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _controller = HomeController();
   final pages = [
-    Container(color: Colors.red),
-    Container(color: Colors.blue),
+    MyBilletsPage(key: UniqueKey()),
+    ExtractPage(key: UniqueKey()),
   ];
 
   @override
@@ -33,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                   style: AppTextStyles.titleRegular,
                   children: [
                     TextSpan(
-                      text: 'Jadiel',
+                      text: widget.user.name,
                       style: AppTextStyles.titleBoldBackground,
                     ),
                   ],
@@ -49,6 +57,9 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                   color: AppColors.black,
                   borderRadius: BorderRadius.circular(5),
+                  image: DecorationImage(
+                    image: NetworkImage(widget.user.photoUrl!),
+                  ),
                 ),
               ),
             ),
@@ -67,14 +78,17 @@ class _HomePageState extends State<HomePage> {
                   _controller.setPage(0);
                 });
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.home,
-                color: AppColors.primary,
+                color: (_controller.currentPage == 0)
+                    ? AppColors.primary
+                    : AppColors.body,
               ),
             ),
             GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/barcode_scanner');
+              onTap: () async {
+                await Navigator.pushNamed(context, '/barcode_scanner');
+                setState(() {});
               },
               child: Container(
                 height: 56,
@@ -95,9 +109,11 @@ class _HomePageState extends State<HomePage> {
                   _controller.setPage(1);
                 });
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.description_outlined,
-                color: AppColors.body,
+                color: (_controller.currentPage == 1)
+                    ? AppColors.primary
+                    : AppColors.body,
               ),
             ),
           ],

@@ -4,8 +4,6 @@ import 'package:pay_flow/modules/barcode_scanner/barcode_scanner_status.dart';
 import 'package:pay_flow/shared/themes/app_colors.dart';
 import 'package:pay_flow/shared/themes/app_text_styles.dart';
 import 'package:pay_flow/shared/widgets/botton_sheet/bottom_sheet_widget.dart';
-import 'package:pay_flow/shared/widgets/divider/divider_vertical.dart';
-import 'package:pay_flow/shared/widgets/label_button/label_button.dart';
 import 'package:pay_flow/shared/widgets/set_label_buttons/set_label_buttons.dart';
 
 class BarcodeScannerPage extends StatefulWidget {
@@ -23,7 +21,11 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
     controller.getAvailableCameras();
     controller.statusNotifier.addListener(() {
       if (controller.status.hasBarcode) {
-        Navigator.pushReplacementNamed(context, '/insert_billet');
+        Navigator.pushReplacementNamed(
+          context,
+          '/insert_billet',
+          arguments: controller.status.barcode,
+        );
       }
     });
 
@@ -92,10 +94,14 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
               bottomNavigationBar: SetLabelButtons(
                 primaryLabel: 'Inserir código do boleto',
                 primaryOnPressed: () {
-                  Navigator.pushReplacementNamed(context, '/insert_billet');
+                  Navigator.pushReplacementNamed(
+                    context,
+                    '/insert_billet',
+                    arguments: '',
+                  );
                 },
-                secondaryLabel: 'Adicionar da  galeria',
-                secondaryOnPressed: () {},
+                secondaryLabel: 'Adicionar da galeria',
+                secondaryOnPressed: controller.scanWithImagePicker,
               ),
             ),
           ),
@@ -105,14 +111,17 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
               if (status.hasError) {
                 return BottomSheetWidget(
                   title: 'Não foi possível identificar um código de barras',
-                  subtitle: 'Tente escanear novamente ou digite o código do seu boleto',
+                  subtitle:
+                      'Tente escanear novamente ou digite o código do seu boleto',
                   primaryLabel: 'Escanear novamente',
-                  primaryOnPressed: () {
-                    controller.scanWithCamera();
-                  },
+                  primaryOnPressed: controller.scanWithCamera,
                   secondaryLabel: 'Digitar código',
                   secondaryOnPressed: () {
-                    Navigator.pushReplacementNamed(context, '/insert_billet');
+                    Navigator.pushReplacementNamed(
+                      context,
+                      '/insert_billet',
+                      arguments: '',
+                    );
                   },
                 );
               } else {
