@@ -13,8 +13,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _controller = HomeController();
   final pages = [
-    Container(color: Colors.red,),
-    Container(color: Colors.blue,),
+    Container(color: Colors.red),
+    Container(color: Colors.blue),
   ];
 
   @override
@@ -29,14 +29,15 @@ class _HomePageState extends State<HomePage> {
             child: ListTile(
               title: Text.rich(
                 TextSpan(
-                    text: 'Olá, ',
-                    style: AppTextStyles.titleRegular,
-                    children: [
-                      TextSpan(
-                        text: 'Jadiel',
-                        style: AppTextStyles.titleBoldBackground,
-                      ),
-                    ]),
+                  text: 'Olá, ',
+                  style: AppTextStyles.titleRegular,
+                  children: [
+                    TextSpan(
+                      text: 'Jadiel',
+                      style: AppTextStyles.titleBoldBackground,
+                    ),
+                  ],
+                ),
               ),
               subtitle: Text(
                 'Mantenha suas contas em dia',
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: AppColors.black,
                   borderRadius: BorderRadius.circular(5),
                 ),
               ),
@@ -72,8 +73,11 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             GestureDetector(
-              onTap: (){print('Clicou...');},
-              child: Container(height: 56,
+              onTap: () {
+                Navigator.pushNamed(context, '/barcode_scanner');
+              },
+              child: Container(
+                height: 56,
                 width: 56,
                 decoration: BoxDecoration(
                   color: AppColors.primary,

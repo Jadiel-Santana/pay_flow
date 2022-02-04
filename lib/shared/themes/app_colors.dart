@@ -14,4 +14,5 @@ class AppColors {
   static const Color background = Color(0xFFFFFFFF);
   static const Color input = Color(0xFFB1B0B8);
   static const Color transparent = Color(0x00000000);
+  static const Color black = Colors.black;
 }
